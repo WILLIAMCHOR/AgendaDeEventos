@@ -19,7 +19,6 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
     
     verificar();
-    /* ORGAZINADOR */
 });
 
 /* ABRIR / FECHAR */
@@ -104,6 +103,9 @@ function verificar() {
     if (timerTarefa == 0) {
         verificaData();
     }
+    else {
+        inputData.className = 'input';
+    }
     verificaProva();
     verificaDisciplina();
 
@@ -112,7 +114,7 @@ function verificar() {
         return item.className == 'input';
     });
     if (validar == true) {
-        /* EXECUTAR */
+        /* EXECUTA SE TIVER TUDO NOS CONFORMES */
         criarEvento();
         organizador();
         fecharForm();
@@ -172,6 +174,26 @@ function organizador() {
     });
     for (cadaEvento of listaEventos) {
         sectionDatas.appendChild(cadaEvento.bloco);
-        console.log(cadaEvento);
     }
 }
+
+/* BOTÕES DOS EVENTOS */
+ 
+function duplicarBloco() {
+    let botao = this;
+    botao = botao.getAttribute('duplicar');
+    botao = document.querySelector('#' + botao);
+    botao.remove();
+}
+/* function checkbox(btn){
+  var idParent = $(btn).parent().attr('id'); 
+  alert(idParent);
+} */
+/* function removeCartao() {
+    var botaoRemove = this;
+    var idDoCartao = botaoRemove.getAttribute("data-ref");
+    var cartao = document.querySelector("#" + idDoCartao);
+    cartao.remove();
+}
+ */
+/* function editarEvento() {} */
