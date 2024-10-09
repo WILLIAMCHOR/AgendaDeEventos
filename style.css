@@ -1,0 +1,290 @@
+* {
+    padding: 0;
+    margin: 0;
+    vertical-align: baseline;
+    list-style: none;
+    box-sizing: border-box;
+    border: 0;
+    font-family: Arial;
+    font-size: 18px;
+    color: #1E1E1E;
+}
+button {
+    cursor: pointer;
+    outline: none;
+}
+button:active span {
+    scale: 75%;
+}
+input {
+    outline: none;
+}
+/* -----------------------
+        HEADER
+----------------------- */
+
+header {
+    display: flex;
+    justify-content: center;
+}
+header nav {
+    top: 10px;
+    position: fixed;
+    overflow: hidden;
+    background: #D9D9D9;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    width: 60%;
+    min-width: 350px;
+}
+header nav ul {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+header nav ul .titulo-Pagina {
+    font-size: 20px;
+}
+header nav ul .li-button-Abrir-Fechar-Form {
+    right: 0;
+    position: absolute;
+}
+header nav ul .li-button-Abrir-Fechar-Form button {
+    height: 50px;
+    width: 80px;
+    background: #33B249;
+    border-left: 1px solid rgba(0, 0, 0, 0.4);
+    transition: background 0.4s;
+}
+header nav ul .li-button-Abrir-Fechar-Form button span {
+    background: transparent;
+    transition: 
+    0.4s ease,
+    scale 0s
+    ;
+}
+header nav ul .li-button-Abrir-Fechar-Form .button-Abrir-Form.fechar {
+    background: #D22E2E;
+}
+header nav ul .li-button-Abrir-Fechar-Form .button-Abrir-Form.fechar span {
+    transform: rotate(45deg);
+}
+/* -----------------------
+        FORM
+----------------------- */
+.section-form {
+    position: fixed;
+    width: 50%;
+    overflow: hidden;
+    visibility: hidden;
+    top: -475px;
+    min-width: 650px;
+    height: 350px;
+    background: #D9D9D9;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: 
+        top 1s,
+        opacity 0.5s,
+        visibility 0.5s
+    ;
+}
+.section-form.opacito {
+    top: 75px;
+    visibility: visible;
+    opacity: 1;
+}
+.section-form .form-topo {
+    background: #A1A1A1;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.section-form .form-corpo {
+    margin: 1vw 3vw;
+}
+.section-form .form-corpo div {
+    display: flex;
+    align-items: center;
+}
+.section-form .form-corpo .linha-form-corpo {
+    margin: 2vw;
+}
+.section-form .form-corpo .linha-form-corpo.data div {
+    width: 300px;
+    height: 40px;
+    margin-right: 2vw;
+}
+.section-form .form-corpo input {
+    height: 40px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.section-form .form-corpo .linha-form-corpo.data div input {
+    width: 260px;
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+}
+.section-form .form-corpo .linha-form-corpo.data div button {
+    background: #4681F4;
+    right: 46%;
+    position: absolute;
+    color: #FFFFFF;
+    height: 40px;
+    width: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 0 10px 10px 0;
+    transition:
+        border-radius 0.4s,
+        width 0.4s
+    ;
+}
+.section-form .form-corpo .linha-form-corpo.data div button::after {
+    content: "M";
+}
+.section-form .form-corpo .linha-form-corpo.data div .button.tarefa {
+    width: 300px;
+    border-radius: 10px;
+}
+
+.section-form .form-corpo .linha-form-corpo.data div .button.tarefa::after {
+    animation: palavras-button 0.7s both; 
+}
+@keyframes palavras-button {
+    0% {
+        content: "M";
+    }
+    10% {
+        content: "Mo";
+    }
+    20% {
+        content: "Mod";
+    }
+    30% {
+        content: "Modo";
+    }
+    40% {
+        content: "Modo ";
+    }
+    50% {
+        content: "Modo T";
+    }
+    60% {
+        content: "Modo Ta";
+    }
+    70% {
+        content: "Modo Tar";
+    }
+    80% {
+        content: "Modo Tare";
+    }
+    90% {
+        content: "Modo Taref";
+    }
+    100% {
+        content: "Modo Tarefa";
+    }
+}
+.section-form .form-corpo .linha-form-corpo.prova input, .linha-form-corpo.linha-form-corpo.disciplina input {
+    width: 300px;
+    border-radius: 10px;
+    margin-right: 2vw;
+}
+.section-form .button-submit-form {
+    background: #33B249;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-right: 0;
+    border-bottom: 0;
+}
+/* ERROR */
+.section-form .form-corpo .linha-form-corpo .input.error {
+    border: 2px solid #D22E2E;
+}
+/* -----------------------
+        DATAS
+----------------------- */
+main {
+    margin: 0 25%;
+}
+section h2 {
+    font-size: 20px;
+    color: #FFFFFF;
+    font-weight: normal;
+}
+.section-datas {
+    margin-top: 75px;
+}
+.section-datas.original {
+    position: absolute;
+    visibility: hidden;
+    top: -100px;
+}
+.section-datas .linha-data {
+    overflow: hidden;
+    margin: 15px 0 5px 0;
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    justify-content: space-between;
+}
+.section-datas .linha-data div {
+    align-items: center;
+    display: flex;
+}
+.section-datas .linha-data .valores-data {
+    width: 100%;
+    height: 50px;
+}
+.section-datas .linha-data .valores-data p {
+    padding: 15px;
+    border-right: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.section-datas .linha-data .botoes-data button {
+    width: 50px;
+    height: 50px;
+    border-left: 1px solid rgba(0, 0, 0, 0.4);
+    background: #A1A1A1;
+    transition: background 0.4s;
+}
+.section-datas .linha-data .botoes-data .button-lixeira:hover {
+    background: #D22E2E;
+}
+/* -----------------------
+        FOOTER
+----------------------- */
+
+footer {
+    position: absolute;
+    width: 60%;
+    min-width: 350px;
+    bottom: 0;
+    margin: 0 20% 10px 20%;
+    background: #D9D9D9;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+footer div {
+    margin: 0 10px;
+}
+footer div p {
+    font-size: 14px;
+}
+footer a span {
+    font-size: 30px;
+}
