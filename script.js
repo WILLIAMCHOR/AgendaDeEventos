@@ -1,30 +1,32 @@
 const buttonAbrirFecharForm = document.querySelector('#button-Abrir-Form');
-const buttonModoTarefa = document.querySelector('#button-Modo-Tarefa');
-    const buttonEditar = document.querySelector('#button-Editar-Item');
-    const buttonDuplicar = document.querySelector('#button-Duplicar-Item');
-    const buttonExcluir = document.querySelector('#button-Excluir-Item');
-
 const sectionForm = document.querySelector('#section-form');
-const form = document.querySelector('#form');
-    const inputData = document.querySelector('#input-data');
-    const inputProva = document.querySelector('#input-prova');
-    const inputDisciplina = document.querySelector('#input-disciplina');
+const form = sectionForm.querySelector('#form');
+const buttonModoTarefa = form.querySelector('#button-Modo-Tarefa');
+
+const inputData = form.querySelector('#input-data');
+const inputProva = form.querySelector('#input-prova');
+const inputDisciplina = form.querySelector('#input-disciplina');
 
 const sectionDatas = document.querySelector('#sectionDatas');
-const linhaOriginal = document.querySelector('#linhaOriginal');
+const buttonEditar = sectionDatas.querySelector('.button-Editar-Item');
+const buttonDuplicar = sectionDatas.querySelector('.button-Duplicar-Item'); /* TEM QUE TERMINRA ESSES BOTOES */
+const buttonExcluir = sectionDatas.querySelector('.button-Excluir-Item');
 
 let listaEventos = []; /* ARMAZENAMENTO DAS INFORMAÇÕES */
+organizador();
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
     
     verificar();
 });
-
+/* BOTÕES DOS EVENTOS */
+buttonEditar.addEventListener('click', (event) => {
+    alert('Hello Word');
+});
 /* ABRIR / FECHAR */
-let timerAbrirFecharForm = 0;
 function ativarAbrirFecharForm() {
-    if (timerAbrirFecharForm == 0) {
+    if (sectionForm.className == 'section-form') {
         AbrirForm();
     }
     else {
@@ -34,17 +36,14 @@ function ativarAbrirFecharForm() {
 function AbrirForm() {
     sectionForm.className = 'section-form opacito';
     buttonAbrirFecharForm.className = 'button-Abrir-Form fechar';
-    timerAbrirFecharForm ++;
 }
 function fecharForm() {
     sectionForm.className = 'section-form';
     buttonAbrirFecharForm.className = 'button-Abrir-Form';
     resetarForm();
-    if (timerTarefa == 1) {
+    if (buttonModoTarefa.className == 'buttonTarefa') {
         buttonModoTarefa.className = 'button';
-        timerTarefa --;
     }
-    timerAbrirFecharForm --;
 }
 function resetarForm() {
     inputData.value = "";
@@ -56,22 +55,19 @@ function resetarForm() {
 }
 /* BOTÕES */
 document.onkeydown = (event) => {
-    if (timerAbrirFecharForm == 1) {
+    if (sectionForm.className == 'section-form opacito') {
         if (event.key === 'Escape') {
             fecharForm();
         }
     }
 }
 /* MODO TAREFA */
-let timerTarefa = 0;
 function tarefado() {
-    if (timerTarefa == 0) {
-        buttonModoTarefa.className = 'button tarefa';
-        timerTarefa ++;
+    if (buttonModoTarefa.className == 'button') {
+        buttonModoTarefa.className = 'buttonTarefa';
     }
     else {
         buttonModoTarefa.className = 'button';
-        timerTarefa --;
     }
 }
 /* VERIFICAR INPUTS */
@@ -100,7 +96,7 @@ function verificaDisciplina() {
     }
 }
 function verificar() {
-    if (timerTarefa == 0) {
+    if (buttonModoTarefa.className == 'button') {
         verificaData();
     }
     else {
@@ -115,26 +111,50 @@ function verificar() {
     });
     if (validar == true) {
         /* EXECUTA SE TIVER TUDO NOS CONFORMES */
-        criarEvento();
+        adicionarNaLista();
         organizador();
         fecharForm();
     }
 }
 
-function criarEvento() {
-    const linhaClonada = linhaOriginal.cloneNode(true);
-    linhaClonada.id = Date.now;
-    const paragrafo = linhaClonada.children[0];
+function adicionarNaLista() {
+    /* CRIAR BLOCO DO ZERO */
+    const linha = document.createElement('div');
+    linha.className = 'linha-data';
+    const valoresLinha = document.createElement('div');
+    valoresLinha.className = 'valores-data';
+    valoresLinha.id = 'valoresData';
+    linha.appendChild(valoresLinha);
 
-    const valoresInput = [];
+    const botoes = document.createElement('div');
+    botoes.className = 'botoes-data';
+    linha.appendChild(botoes);
 
-    const itemBloco = {bloco: linhaClonada};
-    if (timerTarefa == 1) {
+    for (let i = 0; i < 3; i ++) {
+        const botao = document.createElement('button');
+        const span = document.createElement('span');
+
+        if (i == 0) {
+            botao.className = 'button-Editar-Item';
+            span.className = 'fas fa-pencil';
+        }
+        else if (i == 1) {
+            botao.className = 'button-Duplicar-Item';
+            span.className = 'fas fa-clone';
+        }
+        else {
+            botao.className = 'button-Excluir-Item';
+            span.className = 'fas fa-trash-can';
+        }
+        botao.appendChild(span);
+        botoes.appendChild(botao);
+    }
+    /* CRIAR UM OBJETO COM OS VALORES */
+    const itemBloco = {bloco: linha};
+    if (buttonModoTarefa.className == 'buttonTarefa') {
         itemBloco.mes = 0;
         itemBloco.dia = 0;
         itemBloco.tarefa = 'Tarefa';
-
-        valoresInput.push('Tarefa');
     }
     else {
         let dataQuebrada = inputData.value;
@@ -142,58 +162,56 @@ function criarEvento() {
         itemBloco.mes = dataQuebrada[5] + "" + dataQuebrada[6];
         itemBloco.dia = dataQuebrada[8] + "" + dataQuebrada[9];
         itemBloco.tarefa = ""
-
-        valoresInput.push(itemBloco.dia + "/" + itemBloco.mes);
     }
+    itemBloco.prova = inputProva.value;
+    itemBloco.disciplina = inputDisciplina.value;
+
+    /* ENVIAR O OBJETO AO BANCO DE DADOS */
     listaEventos.push(itemBloco);
-
-    valoresInput.push(inputProva.value, inputDisciplina.value);
-    /* COLACANDO OS VALORES NO BLOCO */
-    for (cadaInput of valoresInput) {
-        const text = document.createElement('p');
-        text.textContent = cadaInput;
-        paragrafo.appendChild(text);
-    }
 }
-
 function organizador() {
-    sectionDatas.innerHTML = "";
-    listaEventos.sort((a, b) => {
-        if (a.tarefa == 'Tarefa') {
-            return -1
+    if (listaEventos.length != 0) {
+        for(cadaEvento of listaEventos) {
+            /* VINCULANDO OS VALORES DE CADA BLOCO */
+            cadaEvento.bloco.id = listaEventos.length;
+
+            const paragrafo = cadaEvento.bloco.children[0];
+            paragrafo.innerHTML = "";
+    
+            const valoresInput = [];
+            if (cadaEvento.tarefa == "Tarefa") {
+                valoresInput.push("Tarefa");
+            }
+            else {
+                valoresInput.push(cadaEvento.dia + "/" + cadaEvento.mes);
+            }
+            valoresInput.push(cadaEvento.prova, cadaEvento.disciplina);
+    
+            for (cadaInput of valoresInput) {
+                const text = document.createElement('p');
+                text.textContent = cadaInput;
+                paragrafo.appendChild(text);
+            }
         }
-        else if (a.mes < b.mes) {
-            return -1;
+        /* ORGAZINANDO */
+        sectionDatas.innerHTML = "";
+        listaEventos.sort((a, b) => {
+            if (a.tarefa == 'Tarefa') {
+                return -1
+            }
+            else if (a.mes < b.mes) {
+                return -1;
+            }
+            else if (a.mes == b.mes && a.dia < b.dia) {
+                return -1;
+            }
+            else {
+                return true;
+            }
+        });
+        /* EXIBINDO */
+        for (cadaEvento of listaEventos) { 
+            sectionDatas.appendChild(cadaEvento.bloco);
         }
-        else if (a.mes == b.mes && a.dia < b.dia) {
-            return -1;
-        }
-        else {
-            return true;
-        }
-    });
-    for (cadaEvento of listaEventos) {
-        sectionDatas.appendChild(cadaEvento.bloco);
     }
 }
-
-/* BOTÕES DOS EVENTOS */
- 
-function duplicarBloco() {
-    let botao = this;
-    botao = botao.getAttribute('duplicar');
-    botao = document.querySelector('#' + botao);
-    botao.remove();
-}
-/* function checkbox(btn){
-  var idParent = $(btn).parent().attr('id'); 
-  alert(idParent);
-} */
-/* function removeCartao() {
-    var botaoRemove = this;
-    var idDoCartao = botaoRemove.getAttribute("data-ref");
-    var cartao = document.querySelector("#" + idDoCartao);
-    cartao.remove();
-}
- */
-/* function editarEvento() {} */

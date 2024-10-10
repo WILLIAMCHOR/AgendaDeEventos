@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://kit.fontawesome.com/88176072f4.js' crossorigin='anonymous'></script>
+    <title>Document</title>
+</head>
+<body>
+</body>
+
+<script>
+    const linha = document.createElement('div');
+    linha.className = 'linha-data';
+
+    const valoresLinha = document.createElement('div');
+    valoresLinha.className = 'valores-data';
+    valoresLinha.id = 'valoresData';
+    linha.appendChild(valoresLinha);
+
+    const botoes = document.createElement('div');
+    botoes.className = 'botoes-data';
+    linha.appendChild(botoes);
+
+    for (let i = 0; i < 3; i ++) {
+        const botao = document.createElement('button');
+        const span = document.createElement('span');
+
+        if (i == 0) {
+            botao.className = 'button-Editar-Item';
+            span.className = 'fas fa-pencil';
+        }
+        else if (i == 1) {
+            botao.className = 'button-Duplicar-Item';
+            span.className = 'fas fa-clone';
+        }
+        else {
+            botao.className = 'button-Excluir-Item';
+            span.className = 'fas fa-trash-can';
+        }
+        botao.appendChild(span);
+        botoes.appendChild(botao);
+    }
+    document.body.appendChild(linha);
+    
+</script>
+</html>
