@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="nome">
+    <input type="button" name="Criar" value="Cadastrar" id="botao">
+    <div id="container"></div>
+</body>
+<script>
+    var ids = 1;
+    var nome = window.document.getElementById('nome')
+    var botao = window.document.getElementById('botao')
+    botao.addEventListener('click',clicar_botao)
+
+    function clic(id){
+    document.getElementById('avo'+id).outerHTML = '';
+    }
+
+    function clicar_botao(){
+        var elemento_bisavo = document.getElementById('container');
+        var elemento_avo = document.createElement('table');
+        var elemento_pai = document.createElement('tr');
+        var elemento_filho = document.createElement('th');
+        var elemento_filho2 = document.createElement('th');
+        var botao_apaga = document.createElement('input');
+        var texto = document.createTextNode(nome.value);
+
+        elemento_avo.setAttribute("id","avo"+ids);
+        botao_apaga.setAttribute("type","button");
+        botao_apaga.setAttribute("value","Apagar");
+        botao_apaga.setAttribute("onclick","clic("+ids+")");
+
+
+        elemento_filho.appendChild(texto);
+        elemento_filho2.appendChild(botao_apaga);
+        elemento_bisavo.appendChild(elemento_avo);
+        elemento_avo.appendChild(elemento_pai);
+        elemento_pai.appendChild(elemento_filho);
+        elemento_pai.appendChild(elemento_filho2);
+        ids++;
+    }
+</script>
+<style>
+#container {
+    display: flex;
+    flex-wrap: wrap;
+}
+table {
+    border: 1px solid black; 
+    margin: 10px;
+    vertical-align: bottom;
+}
+</style>
+</html>

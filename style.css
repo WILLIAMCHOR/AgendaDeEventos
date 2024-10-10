@@ -90,7 +90,6 @@ main {
     position: fixed;
     width: 40%;
     overflow: hidden;
-    visibility: hidden;
     top: -475px;
     min-width: 650px;
     height: 50%;
@@ -107,7 +106,6 @@ main {
 }
 .section-form.opacito {
     top: 75px;
-    visibility: visible;
     opacity: 1;
 }
 .section-form .form-topo {
