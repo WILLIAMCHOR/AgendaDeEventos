@@ -20,10 +20,6 @@ form.addEventListener('submit', (event) => {
     
     verificar();
 });
-/* BOTÕES DOS EVENTOS */
-buttonEditar.addEventListener('click', (event) => {
-    alert('Hello Word');
-});
 /* ABRIR / FECHAR */
 function ativarAbrirFecharForm() {
     if (sectionForm.className == 'section-form') {
@@ -117,6 +113,8 @@ function verificar() {
     }
 }
 
+let ids = 0; /* IMPORTANTE PARA BOTOES */
+
 function adicionarNaLista() {
     /* CRIAR BLOCO DO ZERO */
     const linha = document.createElement('div');
@@ -173,8 +171,6 @@ function organizador() {
     if (listaEventos.length != 0) {
         for(cadaEvento of listaEventos) {
             /* VINCULANDO OS VALORES DE CADA BLOCO */
-            cadaEvento.bloco.id = listaEventos.length;
-
             const paragrafo = cadaEvento.bloco.children[0];
             paragrafo.innerHTML = "";
     

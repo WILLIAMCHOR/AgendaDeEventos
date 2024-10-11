@@ -161,7 +161,7 @@ main {
     ;
 }
 .section-form .form-corpo .linha-form-corpo.data div button::after {
-    content: "M";
+    content: "T";
 }
 .section-form .form-corpo .linha-form-corpo.data div .buttonTarefa {
     width: 300px;
@@ -173,37 +173,22 @@ main {
 }
 @keyframes palavras-button {
     0% {
-        content: "M";
-    }
-    10% {
-        content: "Mo";
+        content: "T";
     }
     20% {
-        content: "Mod";
-    }
-    30% {
-        content: "Modo";
+        content: "Ta";
     }
     40% {
-        content: "Modo ";
-    }
-    50% {
-        content: "Modo T";
+        content: "Tar";
     }
     60% {
-        content: "Modo Ta";
-    }
-    70% {
-        content: "Modo Tar";
+        content: "Tare";
     }
     80% {
-        content: "Modo Tare";
-    }
-    90% {
-        content: "Modo Taref";
+        content: "Taref ";
     }
     100% {
-        content: "Modo Tarefa";
+        content: "Tarefa";
     }
 }
 .section-form .form-corpo .linha-form-corpo.prova input, .linha-form-corpo.linha-form-corpo.disciplina input {
