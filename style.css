@@ -255,7 +255,7 @@ section h2 {
     background: #A1A1A1;
     transition: background 0.4s;
 }
-.section-datas .linha-data .botoes-data .button-Excluir-Item:hover {
+.section-datas .linha-data .botoes-data .button-lixeira:hover {
     background: #D22E2E;
 }
 /* -----------------------

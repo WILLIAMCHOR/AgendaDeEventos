@@ -8,16 +8,23 @@ const inputProva = form.querySelector('#input-prova');
 const inputDisciplina = form.querySelector('#input-disciplina');
 
 const sectionDatas = document.querySelector('#sectionDatas');
-const buttonEditar = sectionDatas.querySelector('.button-Editar-Item');
-const buttonDuplicar = sectionDatas.querySelector('.button-Duplicar-Item'); /* TEM QUE TERMINRA ESSES BOTOES */
-const buttonExcluir = sectionDatas.querySelector('.button-Excluir-Item');
 
 let listaEventos = []; /* ARMAZENAMENTO DAS INFORMAÇÕES */
 organizador();
 
+/* DIA ATUAL */
+let diaAtual = new Date();
+inputData.setAttribute('min', diaAtual.getFullYear() + '-01-01');
+inputData.setAttribute('max', diaAtual.getFullYear() + '-12-31');
+
+/* SUBMIT */
 form.addEventListener('submit', (event) => {
     event.preventDefault();
-    
+    if (modoEditar == 1) {
+        const localEditado = listaEventos.indexOf(blocoEditado)
+        listaEventos.splice(localEditado, 1);
+        modoEditar--;
+    }
     verificar();
 });
 /* ABRIR / FECHAR */
@@ -40,6 +47,9 @@ function fecharForm() {
     if (buttonModoTarefa.className == 'buttonTarefa') {
         buttonModoTarefa.className = 'button';
     }
+    if (modoEditar == 1) {
+        modoEditar--;
+    }
 }
 function resetarForm() {
     inputData.value = "";
@@ -49,7 +59,7 @@ function resetarForm() {
     inputProva.className = 'input';
     inputDisciplina.className = 'input';
 }
-/* BOTÕES */
+/* TECLADO */
 document.onkeydown = (event) => {
     if (sectionForm.className == 'section-form opacito') {
         if (event.key === 'Escape') {
@@ -119,6 +129,7 @@ function adicionarNaLista() {
     /* CRIAR BLOCO DO ZERO */
     const linha = document.createElement('div');
     linha.className = 'linha-data';
+    linha.id = 'bloco' + ids;
     const valoresLinha = document.createElement('div');
     valoresLinha.className = 'valores-data';
     valoresLinha.id = 'valoresData';
@@ -128,20 +139,17 @@ function adicionarNaLista() {
     botoes.className = 'botoes-data';
     linha.appendChild(botoes);
 
-    for (let i = 0; i < 3; i ++) {
+    for (let i = 0; i < 2; i ++) {
         const botao = document.createElement('button');
         const span = document.createElement('span');
 
         if (i == 0) {
-            botao.className = 'button-Editar-Item';
+            botao.setAttribute('onclick','editarEvento('+ids+')');
             span.className = 'fas fa-pencil';
         }
-        else if (i == 1) {
-            botao.className = 'button-Duplicar-Item';
-            span.className = 'fas fa-clone';
-        }
         else {
-            botao.className = 'button-Excluir-Item';
+            botao.className = 'button-lixeira';
+            botao.setAttribute('onclick','excluirEvento('+ids+')');
             span.className = 'fas fa-trash-can';
         }
         botao.appendChild(span);
@@ -163,7 +171,10 @@ function adicionarNaLista() {
     }
     itemBloco.prova = inputProva.value;
     itemBloco.disciplina = inputDisciplina.value;
+    itemBloco.identificador = 'bloco' + ids;
 
+    /* MUDANDO A ID */
+    ids++;
     /* ENVIAR O OBJETO AO BANCO DE DADOS */
     listaEventos.push(itemBloco);
 }
@@ -185,6 +196,15 @@ function organizador() {
     
             for (cadaInput of valoresInput) {
                 const text = document.createElement('p');
+                /* VALIDADE DA DATA DO EVENTO */
+                if (cadaEvento.tarefa != "Tarefa") {
+                    if (diaAtual.getMonth() + 1 > cadaEvento.mes) {
+                        text.setAttribute('style', 'color: red');
+                    }
+                    else if (diaAtual.getDate() > cadaEvento.dia && diaAtual.getMonth() + 1 == cadaEvento.mes) {
+                        text.setAttribute('style', 'color: red');
+                    }
+                }
                 text.textContent = cadaInput;
                 paragrafo.appendChild(text);
             }
@@ -210,4 +230,28 @@ function organizador() {
             sectionDatas.appendChild(cadaEvento.bloco);
         }
     }
+}
+/* BOTÕES */
+let modoEditar = 0;
+let blocoEditado = document.body;
+function editarEvento(id) {
+    const itemBloco = listaEventos.find((a) => a.identificador == 'bloco' + id);
+    if (itemBloco.tarefa == 'Tarefa') {
+        buttonModoTarefa.className = 'buttonTarefa';
+    }
+    else {
+        inputData.value = '2024' + '-' + itemBloco.mes + '-' + itemBloco.dia;
+    }
+    inputProva.value = itemBloco.prova;
+    inputDisciplina.value = itemBloco.disciplina;
+    modoEditar++;
+    blocoEditado = itemBloco;
+    AbrirForm();
+}
+function excluirEvento(id) {
+    const localItemBloco = listaEventos.indexOf(listaEventos.find((a) => a.identificador == 'bloco' + id));
+    if (localItemBloco > -1) {
+        listaEventos.splice(localItemBloco, 1);
+    }
+    document.getElementById('bloco' + id).outerHTML = '';
 }
