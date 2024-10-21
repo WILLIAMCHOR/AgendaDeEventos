@@ -1,15 +1,57 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='pt-br'>
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <script src='https://kit.fontawesome.com/88176072f4.js' crossorigin='anonymous'></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='style.css' type='text/css'>
-    <script src='https://kit.fontawesome.com/69f8390c57.js' crossorigin='anonymous'></script>
-    <link rel="shortcut icon" href="scr/images/logoPequeno.png"> <!-- Logo da página -->
+    <link rel='stylesheet' href='lista.css' type='text/css'>
     <title>Agenda de Eventos</title>
 </head>
 <body>
-
+    <header>
+        <nav class="grande">
+            <a class="linkDaPagina" href="index.html"><img src="scr/images/Letra.png" alt="LogoTipo">genda de Eventos</a>
+            <ul>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">Lista</a></li>
+            </ul>
+        </nav>
+        <!-- <nav class="pequeno"></nav> -->
+    </header>
+    <main>
+        <div class="calendario">
+            <div class="titulo">
+                <button class="esquerda"><span class="fas fa-angle-left"></span></button>
+                <h3>Mês</h3> <!-- Usar um id aqui -->
+                <button class="direita"><span class="fas fa-angle-right"></span></button>
+            </div>
+            <div class="semana"></div> <!-- Array com os dias da semana -->
+        </div>
+        <div class="lista">
+            <div class="titulo">
+                <h3>Lista</h3>
+                <button class="direita"><span class="fas fa-plus"></span></button> <!-- Outro id aqui -->
+            </div>
+            <details>   
+                <summary>
+                    <p>Tarefas</p>
+                    <span class="fas fa-angle-down"></span>
+                    <div></div> <!-- Id de tarefas aqui, blocos -->
+                </summary>
+            </details>
+            <details>
+                <summary>
+                    <p>Eventos</p>
+                    <span class="fas fa-angle-down"></span>
+                    <div></div> <!-- Id de eventos aqui, blocos -->
+                </summary>
+            </details>
+        </div>
+    </main>
 </body>
 <script src='script.js'></script>
 </html>

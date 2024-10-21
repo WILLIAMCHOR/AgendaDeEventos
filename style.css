@@ -1,0 +1,64 @@
+/* Reset */
+* {
+    padding: 0;
+    margin: 0;
+    vertical-align: baseline;
+    list-style: none;
+    box-sizing: border-box;
+    border: 0;
+}
+/* Font */
+* {
+    font-family: "Urbanist";
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    color: #1C343E;
+}
+/* Formatações gerais */
+a {
+    text-decoration: none;
+}
+
+/* Formatação do Body */
+body {
+    min-height: 100vh;
+    background: #F3DCB4;
+}
+/* Formatação do Header */ 
+header nav {
+    width: 100%;
+}
+header nav.grande {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1C343E;
+}
+header nav.grande .linkDaPagina {
+    margin: 0 20px -5px 20px;
+    display: flex;
+    align-items: center;
+    color: #FB643D;
+}
+header nav.grande .linkDaPagina img {
+    width: 20px;
+    margin-bottom: 5px;
+}
+header nav.grande ul {
+    display: flex;
+    align-items: center;
+}
+header nav.grande ul li {
+    margin: 0 20px;
+}
+header nav.grande ul li a {
+    color: #FFFFFF;
+}
+header nav.pequeno {
+    background: #FB643D;
+    height: 30px;
+}
+/* Calendário */ 
