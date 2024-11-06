@@ -1,4 +1,3 @@
-/* weekdays */
 /* Código pertercente ao: André Delfino
 "https://github.com/DehDelfino/Calendario" */
 

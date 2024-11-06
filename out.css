@@ -15,45 +15,47 @@
     color: #FFFFFF;
 }
 body { 
-    margin-top: 50px;
-    background: gray;
+    background: #F3DCB4; /* COR TEMPORARIA */
+    min-height: 100vh;
 }
-#container {
+.outTools main section {
     width: 40%;
-    background: #FFFFFF;
+    margin: 2vw;
     overflow: hidden;
     border-radius: 15px;
 }
+main {
+    display: flex;
+    justify-content: center;
+}
+.calendario {
+    background: #FFFFFF;
+    border-radius: 15px;
+}
 button {
-    width: 75px;
     cursor: pointer;
-    box-shadow: 0px 0px 2px gray;
     border: none;
     outline: none;
-    padding: 5px;
-    border-radius: 5px;
+    background: none;
+    margin: 0 15px;
+}
+button span {
+    font-size: 20px;
 }
 
-#header {
+.topo {
     width: 100%;
     height: 60px;
     background: #1C343E;
     padding: 10px;
-    font-size: 26px;
-    font-family: sans-serif;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-#header button {
-    border: none;
-    box-shadow: none;
-    background: none;
+.titulo {
+    font-size: 26px;
 }
-#header button span {
-    font-size: 20px;
-}
-#weekdays {
+.detalhes {
     width: 100%;
     height: 40px;
     padding: 0 10px;
@@ -62,7 +64,7 @@ button {
     align-items: center;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
-#weekdays div {
+.detalhes div {
     text-align: center;
     padding: 0 10px;
     font-size: 18px;
@@ -98,8 +100,45 @@ button {
 .day + #currentDay {
     background-color: rgba(0,0,0,0.2);
 }
-
 .padding {
     cursor: default !important;
     background-color: transparent !important;
+}
+.criarFechar {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    margin: -2px;
+    border-radius: 50%;
+    background: #FB643D;
+}
+.criarFechar span {
+    transition: 0.4s linear;
+}
+.criarFechar.fechar span {
+    transform: rotate(45deg);
+}
+.lista .topo {
+    justify-content: end;
+}
+.lista .topo h2 {
+    margin-right: calc(50%);
+    transform: translateX(50%);
+}
+.lista .detalhes {
+    display: flex;
+    justify-content: end;
+    border-radius: 0 0 15px 15px;
+    margin-bottom: 15px;
+}
+.lista .detalhes:last-child {
+    border-radius: 15px;
+}
+.lista .detalhes h3 {
+    margin-right: calc(50%);
+    transform: translateX(50%);
+}
+.lista .detalhes button {
+    position: absolute;
+    transform: rotateX(180deg);
 }
