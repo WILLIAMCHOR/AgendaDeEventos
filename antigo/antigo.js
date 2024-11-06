@@ -1,6 +1,6 @@
-let eventos = localStorage.getItem('eventos') ? JSON.parse(localStorage.getItem('eventos')) : []
+/* let eventos = localStorage.getItem('eventos') ? JSON.parse(localStorage.getItem('eventos')) : []; */
 
-const buttonAbrirFecharForm = document.querySelector('#button-Abrir-Form');
+const buttonAbrirFecharForm = document.querySelector('#button-Abrir-Form'); /* Terei que refazer todo o código, será mais fácil recriar do que arrumar tudo aqui */
 const sectionForm = document.querySelector('#section-form');
 const form = sectionForm.querySelector('#form');
 const buttonModoTarefa = form.querySelector('#button-Modo-Tarefa');
