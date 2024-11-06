@@ -1,7 +1,7 @@
 
 // variaveis globais
 
-let nav = 0
+let nav = 0;
 let clicked = null
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : []
 
@@ -24,7 +24,6 @@ function openModal(date){
 
   if (eventDay){
    document.getElementById('eventText').innerText = eventDay.title
-   deleteEventModal.style.display = 'block'
 
 
   } else{
@@ -123,7 +122,7 @@ function closeModal(){
   load()
 
 }
-function saveEvent(){
+/* function saveEvent(){
   if(eventTitleInput.value){
     eventTitleInput.classList.remove('error')
 
@@ -145,7 +144,7 @@ function deleteEvent(){
   events = events.filter(event => event.date !== clicked)
   localStorage.setItem('events', JSON.stringify(events))
   closeModal()
-}
+} */
 
 // botões 
 
@@ -162,13 +161,13 @@ function buttons (){
     
   })
 
-  document.getElementById('saveButton').addEventListener('click',()=> saveEvent())
+/*   document.getElementById('saveButton').addEventListener('click',()=> saveEvent())
 
   document.getElementById('cancelButton').addEventListener('click',()=>closeModal())
 
   document.getElementById('deleteButton').addEventListener('click', ()=>deleteEvent())
 
-  document.getElementById('closeButton').addEventListener('click', ()=>closeModal())
+  document.getElementById('closeButton').addEventListener('click', ()=>closeModal()) */
   
 }
 buttons()

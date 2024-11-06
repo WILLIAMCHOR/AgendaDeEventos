@@ -7,54 +7,52 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel='stylesheet' href='style.css' type='text/css'>
+    <!-- <link rel='stylesheet' href='style.css' type='text/css'> -->
     <link rel='stylesheet' href='out.css' type='text/css'>
     <title>Agenda de Eventos</title>
 </head>
 <body>
     <main>
+        <!-- CALENDARIO -->
         <section>
-            <div class="grande">
-                <div class="topo">
-                    <button>Esquerda</button>
-                    <h2 id="mes">
-                        <!-- Més -->
-                    </h2>
-                    <button>Direita</button> 
+            <div id="container">
+                <div id="header">
+                    <button id="backButton"><span class="fas fa-angle-left"></span></button>
+                    <div id="monthDisplay">
+                        <!-- MES -->
+                    </div>
+                        <button id="nextButton"><span class="fas fa-angle-right"></span></button>
                 </div>
-                <div class="subTopo">
-                    <ul>
-                        <li>Dom</li>
-                        <li>Seg</li>
-                        <li>Ter</li>
-                        <li>Qua</li>
-                        <li>Qui</li>
-                        <li>Sex</li>
-                        <li>Sáb</li>
-                    </ul>
+                <div id="weekdays">
+                    <div>Dom</div>
+                    <div>Seg</div>
+                    <div>Ter</div>
+                    <div>Qua</div>
+                    <div>Qui</div>
+                    <div>Sex</div>
+                    <div>Sáb</div>
                 </div>
-                <div id="calendario">
-                    <!-- Datas do calendario -->
-                </div>
-            </div>
-            <!-- Div de Informações -->
+                <!-- div dinamic -->
+                <div id="calendar" ></div>
         </section>
+        <!-- FIM DO CALENDARIO -->
         <section>
-            <div class="grande">
+            <!-- <div class="grande">
                 <div class="topo">
                     <h2>Lista</h2>
                     <button>Adicionar</button>
                 </div>
             </div>
             <div class="blocos" id="tarefas">
-                <!-- Bloquinhos -->
+                
             </div>
             <div class="blocos" id="eventos">
-                <!-- Bloquinhos -->
-            </div>
+                
+            </div> -->
         </section>
     </main>
 </body>
-<script src='script.js'></script>
-<script src="calendar.js"></script>
+<script src='scripts/calendar.js'></script>
+<script src="scripts/script.js"></script>
+<!-- <script src="calendar.js"></script> -->
 </html>
