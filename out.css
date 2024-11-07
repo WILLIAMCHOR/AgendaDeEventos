@@ -20,7 +20,7 @@ body {
 }
 .outTools main section {
     width: 40%;
-    margin: 2vw;
+    margin: 2vw 1vw;
     overflow: hidden;
     border-radius: 15px;
 }
@@ -118,6 +118,14 @@ button span {
 .criarFechar.fechar span {
     transform: rotate(45deg);
 }
+.lista::before {
+    position: absolute;
+    content: "";
+    background: #FB643D;
+    margin-top: 60px;
+    height: 15px;
+    width: 40%;
+}
 .lista .topo {
     justify-content: end;
 }
@@ -126,19 +134,86 @@ button span {
     transform: translateX(50%);
 }
 .lista .detalhes {
+    position: relative;
     display: flex;
     justify-content: end;
-    border-radius: 0 0 15px 15px;
     margin-bottom: 15px;
-}
-.lista .detalhes:last-child {
     border-radius: 15px;
 }
 .lista .detalhes h3 {
     margin-right: calc(50%);
     transform: translateX(50%);
 }
-.lista .detalhes button {
+.lista .detalhes span {
+    font-size: 20px;
+    margin: 0 10px;
     position: absolute;
     transform: rotateX(180deg);
+}
+.lista .detalhes{
+    overflow: hidden;
+}
+.lista .detalhes:first-child {
+    height: 40px;
+}
+/* FORM */
+input {
+    text-align: center;
+    outline: none;
+    width: 40%;
+    height: 40px;
+    background: transparent;
+    border-radius: 15px;
+    color: #FB643D;
+    padding: 10px;
+    font-size: 17px;
+}
+form {
+    overflow: hidden;
+    height: 0; /* Tamanho ajustavel */
+    position: relative;
+    background: #FFFFFF;
+    border-radius: 15px;
+}
+form label {
+    text-align: center;
+    color: #1C343E;
+    width: 30%;
+    margin: 0 10%;
+}
+form .linha {
+    display: flex;
+    padding: 10px;
+    margin: 15px 25px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 25px;
+    align-items: center;
+}
+form .linha.data div {
+    overflow: hidden;
+    width: 40%;
+    display: flex;
+    justify-content: end;
+    border-radius: 15px;
+    border: 2px solid #FB643D;
+}
+form .linha.data div input {
+    position: absolute;
+    border: 2px none;
+    height: 36px;
+    width: calc(50% - 80px);
+}
+form .linha.data button {
+    position: relative;
+    margin: 0;
+    width: 36px;
+    height: 36px;
+    background: #FB643D;
+}
+form .linha.data button::after {
+    font-size: 18px;
+    content: "S";
+}
+form .linha input {
+    border: 2px solid #FB643D;
 }
