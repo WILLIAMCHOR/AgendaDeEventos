@@ -104,6 +104,7 @@ button span {
     cursor: default !important;
     background-color: transparent !important;
 }
+
 .criarFechar {
     position: absolute;
     height: 40px;
@@ -113,7 +114,7 @@ button span {
     background: #FB643D;
 }
 .criarFechar span {
-    transition: 0.4s linear;
+    transition: 0.2s ease;
 }
 .criarFechar.fechar span {
     transform: rotate(45deg);
@@ -135,6 +136,7 @@ button span {
 }
 .lista .detalhes {
     position: relative;
+    overflow: hidden;
     display: flex;
     justify-content: end;
     margin-bottom: 15px;
@@ -149,9 +151,6 @@ button span {
     margin: 0 10px;
     position: absolute;
     transform: rotateX(180deg);
-}
-.lista .detalhes{
-    overflow: hidden;
 }
 .lista .detalhes:first-child {
     height: 40px;
@@ -174,6 +173,9 @@ form {
     position: relative;
     background: #FFFFFF;
     border-radius: 15px;
+}
+form.aberto {
+    height: auto;
 }
 form label {
     text-align: center;
@@ -214,6 +216,25 @@ form .linha.data button::after {
     font-size: 18px;
     content: "S";
 }
+form .linha.data button.tarefa {
+    width: 100%;
+}
+form .linha.data button.tarefa::after {
+    content: "Sem data";
+}
 form .linha input {
     border: 2px solid #FB643D;
+}
+form .final {
+    margin: 10px 0;
+    display: flex;
+    justify-content: end;
+}
+form .final .buttonSubmit {
+    margin: 0;
+    margin-bottom: -10px;
+    height: 60px;
+    width: 60px;
+    border-radius: 15px 0 0 0;
+    background: #FC7755;
 }
