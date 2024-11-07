@@ -105,7 +105,7 @@ button span {
     background-color: transparent !important;
 }
 
-.criarFechar {
+.button-Abrir-Form {
     position: absolute;
     height: 40px;
     width: 40px;
@@ -113,10 +113,10 @@ button span {
     border-radius: 50%;
     background: #FB643D;
 }
-.criarFechar span {
+.button-Abrir-Form span {
     transition: 0.2s ease;
 }
-.criarFechar.fechar span {
+.button-Abrir-Form.fechar span {
     transform: rotate(45deg);
 }
 .lista::before {
@@ -167,14 +167,14 @@ input {
     padding: 10px;
     font-size: 17px;
 }
-form {
+.section-form {
     overflow: hidden;
     height: 0; /* Tamanho ajustavel */
     position: relative;
     background: #FFFFFF;
     border-radius: 15px;
 }
-form.aberto {
+.section-form.opacito {
     height: auto;
 }
 form label {

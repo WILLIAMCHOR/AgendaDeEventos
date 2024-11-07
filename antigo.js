@@ -1,5 +1,3 @@
-/* let eventos = localStorage.getItem('eventos') ? JSON.parse(localStorage.getItem('eventos')) : []; */
-
 const buttonAbrirFecharForm = document.querySelector('#button-Abrir-Form'); /* Terei que refazer todo o código, será mais fácil recriar do que arrumar tudo aqui */
 const sectionForm = document.querySelector('#section-form');
 const form = sectionForm.querySelector('#form');
@@ -11,8 +9,7 @@ const inputDisciplina = form.querySelector('#input-disciplina');
 
 const sectionDatas = document.querySelector('#sectionDatas');
 
-let listaEventos = []; /* ARMAZENAMENTO DAS INFORMAÇÕES */
-organizador();
+let listaEventos = localStorage.getItem('navegador') ? JSON.parse(localStorage.getItem('navegador')) : [];
 
 /* DIA ATUAL */
 let diaAtual = new Date();
@@ -124,41 +121,10 @@ function verificar() {
         fecharForm();
     }
 }
-
-let ids = 0; /* IMPORTANTE PARA BOTOES */
-
+let ids = 0;
 function adicionarNaLista() {
-    /* CRIAR BLOCO DO ZERO */
-    const linha = document.createElement('div');
-    linha.className = 'linha-data';
-    linha.id = 'bloco' + ids;
-    const valoresLinha = document.createElement('div');
-    valoresLinha.className = 'valores-data';
-    valoresLinha.id = 'valoresData';
-    linha.appendChild(valoresLinha);
-
-    const botoes = document.createElement('div');
-    botoes.className = 'botoes-data';
-    linha.appendChild(botoes);
-
-    for (let i = 0; i < 2; i ++) {
-        const botao = document.createElement('button');
-        const span = document.createElement('span');
-
-        if (i == 0) {
-            botao.setAttribute('onclick','editarEvento('+ids+')');
-            span.className = 'fas fa-pencil';
-        }
-        else {
-            botao.className = 'button-lixeira';
-            botao.setAttribute('onclick','excluirEvento('+ids+')');
-            span.className = 'fas fa-trash-can';
-        }
-        botao.appendChild(span);
-        botoes.appendChild(botao);
-    }
     /* CRIAR UM OBJETO COM OS VALORES */
-    const itemBloco = {bloco: linha};
+    const itemBloco = {};
     if (buttonModoTarefa.className == 'buttonTarefa') {
         itemBloco.mes = 0;
         itemBloco.dia = 0;
@@ -169,48 +135,81 @@ function adicionarNaLista() {
         dataQuebrada = Array.from(dataQuebrada);
         itemBloco.mes = dataQuebrada[5] + "" + dataQuebrada[6];
         itemBloco.dia = dataQuebrada[8] + "" + dataQuebrada[9];
-        itemBloco.tarefa = ""
+        itemBloco.tarefa = "";
     }
     itemBloco.prova = inputProva.value;
     itemBloco.disciplina = inputDisciplina.value;
-    itemBloco.identificador = 'bloco' + ids;
+    itemBloco.identificador = ids;
 
-    /* MUDANDO A ID */
-    ids++;
+
     /* ENVIAR O OBJETO AO BANCO DE DADOS */
     listaEventos.push(itemBloco);
+    localStorage.setItem('navegador', JSON.stringify(listaEventos));
+    /* Somando */
+    ids++;
 }
 function organizador() {
     if (listaEventos.length != 0) {
-        for(cadaEvento of listaEventos) {
+        for(itemBloco of listaEventos) {
+            /* CRIAR BLOCO DO ZERO */
+            const linha = document.createElement('div');
+            linha.className = 'linha-data';
+            linha.id = itemBloco.identificador;
+            
+            const valoresLinha = document.createElement('div');
+            valoresLinha.className = 'valores-data';
+            valoresLinha.id = 'valoresData';
+            linha.appendChild(valoresLinha);
+
+            const botoes = document.createElement('div');
+            botoes.className = 'botoes-data';
+            linha.appendChild(botoes);
+
+            for (let i = 0; i < 2; i ++) {
+                const botao = document.createElement('button');
+                const span = document.createElement('span');
+
+                if (i == 0) {
+                    botao.setAttribute('onclick','editarEvento('+itemBloco.identificador+')');
+                    span.className = 'fas fa-pencil';
+                }
+                else {
+                    botao.className = 'button-lixeira';
+                    botao.setAttribute('onclick','excluirEvento('+itemBloco.identificador+')');
+                    span.className = 'fas fa-trash-can';
+                }
+                botao.appendChild(span);
+                botoes.appendChild(botao);
+            } 
             /* VINCULANDO OS VALORES DE CADA BLOCO */
-            const paragrafo = cadaEvento.bloco.children[0];
-            paragrafo.innerHTML = "";
+            const paragrafo = linha.children[0];
     
             const valoresInput = [];
-            if (cadaEvento.tarefa == "Tarefa") {
+            if (itemBloco.tarefa == "Tarefa") {
                 valoresInput.push("Tarefa");
             }
             else {
-                valoresInput.push(cadaEvento.dia + "/" + cadaEvento.mes);
+                valoresInput.push(itemBloco.dia + "/" + itemBloco.mes);
             }
-            valoresInput.push(cadaEvento.prova, cadaEvento.disciplina);
+            valoresInput.push(itemBloco.prova, itemBloco.disciplina);
     
             for (cadaInput of valoresInput) {
                 const text = document.createElement('p');
                 /* VALIDADE DA DATA DO EVENTO */
-                if (cadaEvento.tarefa != "Tarefa") {
-                    if (diaAtual.getMonth() + 1 > cadaEvento.mes) {
+                if (itemBloco.tarefa != "Tarefa") {
+                    if (diaAtual.getMonth() + 1 > itemBloco.mes) {
                         text.setAttribute('style', 'color: red');
                     }
-                    else if (diaAtual.getDate() > cadaEvento.dia && diaAtual.getMonth() + 1 == cadaEvento.mes) {
+                    else if (diaAtual.getDate() > itemBloco.dia && diaAtual.getMonth() + 1 == itemBloco.mes) {
                         text.setAttribute('style', 'color: red');
                     }
                 }
                 text.textContent = cadaInput;
                 paragrafo.appendChild(text);
             }
+            itemBloco.bloco = linha;
         }
+
         /* ORGAZINANDO */
         sectionDatas.innerHTML = "";
         listaEventos.sort((a, b) => {
@@ -228,8 +227,8 @@ function organizador() {
             }
         });
         /* EXIBINDO */
-        for (cadaEvento of listaEventos) { 
-            sectionDatas.appendChild(cadaEvento.bloco);
+        for (itemBloco of listaEventos) { 
+            sectionDatas.appendChild(itemBloco.bloco);
         }
     }
 }
@@ -237,7 +236,8 @@ function organizador() {
 let modoEditar = 0;
 let blocoEditado = document.body;
 function editarEvento(id) {
-    const itemBloco = listaEventos.find((a) => a.identificador == 'bloco' + id);
+    const itemBloco = listaEventos.find((a) => a.identificador == id);
+    console.log(itemBloco);
     if (itemBloco.tarefa == 'Tarefa') {
         buttonModoTarefa.className = 'buttonTarefa';
     }
@@ -251,9 +251,11 @@ function editarEvento(id) {
     AbrirForm();
 }
 function excluirEvento(id) {
-    const localItemBloco = listaEventos.indexOf(listaEventos.find((a) => a.identificador == 'bloco' + id));
+    const localItemBloco = listaEventos.indexOf(listaEventos.find((a) => a.identificador == id));
     if (localItemBloco > -1) {
         listaEventos.splice(localItemBloco, 1);
     }
-    document.getElementById('bloco' + id).outerHTML = '';
+    document.getElementById(id).outerHTML = '';
+    localStorage.setItem('navegador', JSON.stringify(listaEventos));   
 }
+organizador();
